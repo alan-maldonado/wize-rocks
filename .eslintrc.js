@@ -2,8 +2,13 @@
 
 module.exports = {
   root: true,
-  parser: 'babel-eslint',
+  extends: [
+    'standard',
+    'plugin:vue/recommended'
+  ],
   parserOptions: {
+    parser: 'babel-eslint',
+    ecmaVersion: 2017,
     sourceType: 'module'
   },
   env: {
@@ -16,6 +21,14 @@ module.exports = {
   // add your custom rules here
   'rules': {
     // allow debugger during development
-    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0
+    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
+    //vue-recommended
+    'vue/max-attributes-per-line': [2, {
+      singleline: 3,
+      multiline: {
+        max: 3,
+        allowFirstLine: true
+      }
+    }]
   }
 }
