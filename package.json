@@ -10,9 +10,13 @@
     "build": "node build/build.js",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "test": "npm run unit",
-    "lint": "eslint --ext .js,.vue src test/unit/specs"
+    "lint": "eslint --ext .js,.vue src test/unit/specs --fix",
+    "deploy": "npm run build && s3-website deploy dist"
   },
   "dependencies": {
+    "auth0-lock": "^10.24.1",
+    "dotenv-webpack": "^1.5.4",
+    "jwt-decode": "^2.2.0",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },
