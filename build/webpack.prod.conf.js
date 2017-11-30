@@ -13,6 +13,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
 const loadMinified = require('./load-minified')
+const Dotenv = require('dotenv-webpack')
 
 const env = process.env.NODE_ENV === 'testing'
   ? require('../config/test.env')
@@ -35,6 +36,10 @@ const webpackConfig = merge(baseWebpackConfig, {
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
     new webpack.DefinePlugin({
       'process.env': env
+    }),
+    new Dotenv({
+      systemvars: true,
+      silent: true
     }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
