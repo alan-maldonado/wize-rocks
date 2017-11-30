@@ -211,7 +211,7 @@ $(window).resize(function() {
     seq = seq2 = 0;
 
     setTimeout(function() {
-        demo.initDashboardPageCharts();
+        // demo.initDashboardPageCharts();
     }, 500);
 });
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="wrapper" v-if="profile">
     <div
       class="sidebar"
       data-active-color="red"
@@ -10,9 +10,9 @@
       </div>
       <div class="sidebar-wrapper">
         <div class="user">
-          <div class="photo"><img src="../assets/img/faces/avatar.jpg"></div>
+          <div class="photo"><img :src="profile.picture"></div>
           <div class="info">
-            <a class="collapsed" data-toggle="collapse" href="#collapseExample"><span>Tania Andrew <b class="caret" /></span></a>
+            <a class="collapsed" data-toggle="collapse" href="#collapseExample"><span>{{ profile.name }} <b class="caret" /></span></a>
             <div class="clearfix" />
             <div class="collapse" id="collapseExample">
               <ul class="nav">
@@ -24,6 +24,9 @@
                 </li>
                 <li>
                   <a href="#"><span class="sidebar-mini">S</span> <span class="sidebar-normal">Settings</span></a>
+                </li>
+                <li>
+                  <a href="#" @click.prevent="logout"><span class="sidebar-mini">E</span> <span class="sidebar-normal">Exit</span></a>
                 </li>
               </ul>
             </div>
@@ -99,42 +102,33 @@
         </div>
       </nav>
       <div class="content">
-        <div class="container-fluid" />
-      </div>
-      <footer class="footer">
         <div class="container-fluid">
-          <nav class="pull-left">
-            <ul>
-              <li>
-                <a href="#">Home</a>
-              </li>
-              <li>
-                <a href="#">Company</a>
-              </li>
-              <li>
-                <a href="#">Portofolio</a>
-              </li>
-              <li>
-                <a href="#">Blog</a>
-              </li>
-            </ul>
-          </nav>
-          <p class="copyright pull-right">&copy; 2017
-            <a href="/">Wize Rocks</a> , made with love
-          </p>
+          <pre>{{ profile }}</pre>
         </div>
-      </footer>
+      </div>
+      <footer-region />
     </div>
   </div>
 </template>
 
 <script>
+import FooterRegion from './regions/Footer'
+import { getProfile, logout } from '../services/auth'
 export default {
+  components: {
+    FooterRegion
+  },
   data () {
     return {
       activeColor: ['purple', 'blue', 'green', 'orange', 'red', 'rose'],
       background: ['white', 'black']
     }
+  },
+  computed: {
+    profile: getProfile
+  },
+  methods: {
+    logout
   }
 }
 </script>
